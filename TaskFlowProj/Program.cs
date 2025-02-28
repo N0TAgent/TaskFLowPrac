@@ -56,7 +56,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// Настройка CORS для разрешения запросов с вашего фронтенда (например, http://127.0.0.1:5500)
+// Настройка CORS для разрешения запросов с фронтенда
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>

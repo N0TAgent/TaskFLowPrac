@@ -14,6 +14,7 @@ using TaskFlowProj.Hubs;
 
 namespace TaskFlow.Services
 {
+    // Сервис для управления пользователями: регистрация, аутентификация и получение данных пользователя.
     public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;
@@ -23,7 +24,8 @@ namespace TaskFlow.Services
             _userRepository = userRepository;
             _jwtSettings = jwtOptions.Value;
         }
-
+        // Метод регистрации нового пользователя.
+        // Хэширует пароль и сохраняет нового пользователя в базе данных.
         public async Task<User> RegisterAsync(string email, string password)
         {
             // Проверка на существование пользователя
@@ -40,7 +42,8 @@ namespace TaskFlow.Services
             await _userRepository.SaveAsync();
             return user;
         }
-
+        // Метод аутентификации пользователя.
+        // Генерирует и возвращает JWT-токен для дальнейшей аутентификации клиента.
         public async Task<string> LoginAsync(string email, string password)
         {
             var user = (await _userRepository.GetAllAsync()).FirstOrDefault(u => u.Email == email);
@@ -63,7 +66,7 @@ namespace TaskFlow.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-
+        // Метод для получения данных пользователя по его идентификатору.
         public async Task<User> GetByIdAsync(int id)
         {
             return await _userRepository.GetByIdAsync(id);

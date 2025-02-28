@@ -7,8 +7,11 @@ using TaskFlow.Models;
 
 namespace TaskFlow.Repositories
 {
+    // Репозиторий для работы с сущностями типа User.
+    // Реализует интерфейс IRepository<User>, предоставляя стандартные операции CRUD.
     public class UserRepository : IRepository<User>
     {
+        // Контекст базы данных для доступа к таблице Users.
         private readonly ApplicationDbContext _context;
         public UserRepository(ApplicationDbContext context) => _context = context;
 

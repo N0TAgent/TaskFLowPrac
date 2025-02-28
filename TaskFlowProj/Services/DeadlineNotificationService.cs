@@ -21,7 +21,7 @@ public class DeadlineNotificationService : IHostedService, IDisposable
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        // Запускаем проверку каждую минуту
+        // Запускает проверку каждую минуту
         _timer = new Timer(CheckDeadlines, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
         return Task.CompletedTask;
     }
@@ -32,7 +32,7 @@ public class DeadlineNotificationService : IHostedService, IDisposable
         {
             var taskService = scope.ServiceProvider.GetRequiredService<ITaskService>();
             var tasks = await taskService.GetAllTasksAsync();
-            var now = DateTime.Now; // Локальное время сервера (например, GMT+5)
+            var now = DateTime.Now; // Локальное время сервера
             foreach (var task in tasks)
             {
                 // Если deadline хранится в UTC, преобразуем его в локальное время
